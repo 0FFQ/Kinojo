@@ -219,7 +219,7 @@ export default function MovieDetail() {
         <Grid size={12}>
           <Typography variant="h5">Смотреть онлайн</Typography>
         </Grid>
-        <Grid>video</Grid>
+        <VideoPlayer />
       </Grid>
       {/* -------------------- */}
       <Stack alignItems="center">
