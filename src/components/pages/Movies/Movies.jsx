@@ -1,10 +1,9 @@
-import { Link, Stack } from "@mui/material";
+import { Link, Stack, Box, CircularProgress } from "@mui/material";
 import BearCarousel, { BearSlideImage } from "bear-react-carousel";
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import useMoviesQuery from "../../../hooks/useMoviesQuery";
 import ErrorMessage from "../ui/ErrorMessage";
-import MoviesSkeleton from "./MoviesSkeleton";
 
 export default function Movies() {
   const {
@@ -17,7 +16,17 @@ export default function Movies() {
     responseCartoons,
   } = useMoviesQuery();
 
-  if (isLoading) return <MoviesSkeleton />;
+  if (isLoading)
+    return (
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        height="60vh" // чтобы вертикально центрировать
+      >
+        <CircularProgress color="inherit" size="4rem" />
+      </Box>
+    );
 
   if (hasError) return <ErrorMessage />;
 

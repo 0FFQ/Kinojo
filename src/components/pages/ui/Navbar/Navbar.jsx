@@ -1,5 +1,4 @@
 import MenuIcon from "@mui/icons-material/Menu";
-import MovieIcon from "@mui/icons-material/Movie";
 import {
   AppBar,
   Box,
@@ -90,7 +89,13 @@ export default function Navbar() {
                 </List>
               </Box>
             </Drawer>
-            <Stack flexDirection="row" justifyContent="space-between" alignItems="center" width="100%">
+            <Stack
+              flexDirection="row"
+              justifyContent="space-between"
+              alignItems="center"
+              width="100%"
+              sx={{ px: 2 }}
+            >
               <Typography
                 sx={{ color: "white", textDecoration: "none" }}
                 component={RouterLink}
@@ -99,7 +104,9 @@ export default function Navbar() {
               >
                 Kinojo
               </Typography>
-              <Search />
+              <Box sx={{ width: { xs: "60%", sm: 300 } }}>
+                <Search />
+              </Box>
             </Stack>
           </Toolbar>
         </Container>
