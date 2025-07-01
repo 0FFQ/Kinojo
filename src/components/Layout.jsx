@@ -1,14 +1,14 @@
 import { Box, Container } from "@mui/material";
 import React from "react";
 import { Outlet } from "react-router-dom";
+import GlobalScrollStyles from "../components/pages/ui/Scroll/CustomScrollAutocomplete";
 import Footer from "./pages/ui/Footer";
 import Navbar from "./pages/ui/Navbar";
-import GlobalScrollStyles from "./pages/ui/Scroll/CustomScrollAutocomplete"; // путь подкорректируй, если другой
 
 export default function Layout() {
   return (
-    <div>
-      <GlobalScrollStyles />
+    <>
+      <GlobalScrollStyles /> {/* применяем глобальные стили скролла */}
       <Container
         fixed
         sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
@@ -18,6 +18,6 @@ export default function Layout() {
         <Outlet />
         <Footer />
       </Container>
-    </div>
+    </>
   );
 }
