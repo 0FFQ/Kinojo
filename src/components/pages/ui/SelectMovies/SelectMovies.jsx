@@ -10,7 +10,10 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { resetQuery, selectQuery } from "../../../../features/currentQuerySlice";
+import {
+  resetQuery,
+  selectQuery,
+} from "../../../../features/currentQuerySlice";
 
 export default function SelectMovies({
   countriesList,
@@ -95,7 +98,20 @@ export default function SelectMovies({
         </Select>
       </FormControl>
       <Box>
-        <Button onClick={() => dispatch(resetQuery())} variant="outlined" startIcon={<CloseIcon />}>
+        <Button
+          onClick={() => dispatch(resetQuery())}
+          variant="outlined"
+          startIcon={<CloseIcon />}
+          sx={{
+            color: "rgba(255, 255, 255, 0.7)",
+            borderColor: "rgba(117, 115, 115, 0.7)",
+            "&:hover": {
+              borderColor: "rgba(255, 255, 255, 1)",
+              backgroundColor: "transparent",
+              color: "rgba(255, 255, 255, 0.7)", 
+            },
+          }}
+        >
           Сбросить
         </Button>
       </Box>
