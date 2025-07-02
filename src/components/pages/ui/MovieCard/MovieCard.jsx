@@ -6,41 +6,57 @@ import styles from "./MovieCard.module.css";
 
 export default function MovieCard({ movie }) {
   return (
-    <Stack>
+    <Stack
+      sx={{
+        margin: "2.5px", // небольшой отступ вокруг карточки, чтобы между ними было 5px
+      }}
+    >
       <Box sx={{ position: "relative", display: "inline-block" }}>
         <RouterLink to={`/movie/${movie.kinopoiskId}`}>
           <img
             src={movie.posterUrlPreview}
             alt={movie.nameRu}
-            className={styles.img}
+            style={{
+              width: 200,
+              height: 300,
+              objectFit: "cover",
+              borderRadius: 8,
+            }}
           />
         </RouterLink>
 
-            <Box
-              sx={{
-                position: "absolute",
-                top: 8,
-                right: 8,
-                backgroundColor: "rgba(0, 0, 0, 0.7)",
-                color: "white",
-                px: 1.5,
-                py: 0.3,
-                borderRadius: "8px",
-                fontWeight: "bold",
-                fontSize: "14px",
-                userSelect: "none",
-                display: "flex",
-                alignItems: "center",
-                gap: "4px",
-                minWidth: "40px",
-                boxShadow: "0 0 6px rgba(0,0,0,0.7)",
-              }}
-              title={`Рейтинг зрителей: ${movie.ratingKinopoisk} / 10`}
-            >
-              <PeopleIcon sx={{ color: "#ffffff", fontSize: 16 }} />
-              <span>{movie.ratingKinopoisk.toFixed(1)}</span>
-            </Box>
-
+        <Box
+          sx={{
+            position: "absolute",
+            top: 8,
+            right: 8,
+            backgroundColor: "rgba(0, 0, 0, 0.7)",
+            color: "white",
+            px: 1.5,
+            py: 0.3,
+            borderRadius: "8px",
+            fontWeight: "bold",
+            fontSize: "14px",
+            userSelect: "none",
+            display: "flex",
+            alignItems: "center",
+            gap: "4px",
+            minWidth: "40px",
+            boxShadow: "0 0 6px rgba(0,0,0,0.7)",
+          }}
+          title={`Рейтинг зрителей: ${
+            Number.isFinite(movie.ratingKinopoisk)
+              ? movie.ratingKinopoisk.toFixed(1)
+              : "нет данных"
+          } / 10`}
+        >
+          <PeopleIcon sx={{ color: "#ffffff", fontSize: 16 }} />
+          <span>
+            {Number.isFinite(movie.ratingKinopoisk)
+              ? movie.ratingKinopoisk.toFixed(1)
+              : "—"}
+          </span>
+        </Box>
       </Box>
 
       <Link
