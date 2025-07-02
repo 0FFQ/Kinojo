@@ -21,7 +21,7 @@ import {
 import React, { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { iconComponents, MOVIE_LISTS, TOP_LISTS } from "../../../../constants";
-import Search from "../Search";
+import Search from "../Search/Search"
 
 const Icon = ({ iconName }) => {
   const IconComponent = iconComponents[iconName];
@@ -34,6 +34,7 @@ export default function Navbar() {
   const trigger = useScrollTrigger({
     target: window,
   });
+
   const handleDrawerToggle = () => {
     setOpen((prevState) => !prevState);
   };
@@ -104,7 +105,7 @@ export default function Navbar() {
               >
                 Kinojo
               </Typography>
-              <Box sx={{ width: { xs: "60%", sm: 300 } }}>
+              <Box sx={{ width: { xs: "60%", sm: 300 }, minWidth: 200, maxWidth: 400 }}>
                 <Search />
               </Box>
             </Stack>

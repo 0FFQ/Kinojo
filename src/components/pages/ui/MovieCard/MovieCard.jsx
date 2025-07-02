@@ -1,14 +1,14 @@
-import PeopleIcon from "@mui/icons-material/People"; // для зрителей
+import PeopleIcon from "@mui/icons-material/People";
 import { Box, Link, Stack } from "@mui/material";
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
-import styles from "./MovieCard.module.css";
+
 
 export default function MovieCard({ movie }) {
   return (
     <Stack
       sx={{
-        margin: "2.5px", // небольшой отступ вокруг карточки, чтобы между ними было 5px
+        margin: "2.5px", // отступ вокруг карточки
       }}
     >
       <Box sx={{ position: "relative", display: "inline-block" }}>

@@ -1,11 +1,15 @@
 import SearchIcon from "@mui/icons-material/Search";
-import { CircularProgress, InputAdornment, TextField } from "@mui/material";
+import {
+  Autocomplete,
+  CircularProgress,
+  InputAdornment,
+  TextField,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setSearchQuery } from "../../../../features/searchQuerySlice";
 import { useGetFilmsQuery } from "../../../../services/kinopoiskApi";
-import CustomScrollAutocomplete from "../Scroll/CustomScrollAutocomplete"; // импорт кастомного autocomplete
 
 export default function Search() {
   const dispatch = useDispatch();
@@ -30,7 +34,7 @@ export default function Search() {
       dispatch(setSearchQuery({ keyword: input }));
     }, 500);
     return () => clearTimeout(timeoutId);
-  }, [input]);
+  }, [input, dispatch]);
 
   const { data, isFetching } = useGetFilmsQuery({
     countries,
@@ -52,7 +56,7 @@ export default function Search() {
   const isOpen = open && !isFetching && filteredOptions.length > 0;
 
   return (
-    <CustomScrollAutocomplete
+    <Autocomplete
       freeSolo
       open={isOpen}
       onOpen={() => {
@@ -66,7 +70,9 @@ export default function Search() {
         mx: 2,
       }}
       getOptionLabel={(option) =>
-        `${option.nameRu} (${movieTypes[option.type]}, ${option.year})`
+        typeof option === "string"
+          ? option
+          : `${option.nameRu} (${movieTypes[option.type]}, ${option.year})`
       }
       options={filteredOptions}
       onInputChange={(_, value) => setInput(value)}
