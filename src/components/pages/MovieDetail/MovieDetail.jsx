@@ -1,4 +1,4 @@
-import { ArrowBack, Language } from "@mui/icons-material";
+import { ArrowBack } from "@mui/icons-material";
 import {
   Box,
   Button,
@@ -27,6 +27,7 @@ export default function MovieDetail() {
   const responseStaff = useGetStaffQuery(id);
   const navigate = useNavigate();
 
+  
   if (
     responsefilm.isLoading ||
     responseSequelsAndPrequels.isLoading ||
@@ -42,17 +43,56 @@ export default function MovieDetail() {
   if (responsefilm.error || responseStaff.error) {
     return <ErrorMessage />;
   }
-
   return (
     <>
       <Grid container spacing={{ xs: 1, md: 2 }} mt={0.5}>
-        <Grid size={{ sm: 12, md: 4 }}>
-          <img
-            src={responsefilm.data.posterUrl}
-            alt={responsefilm.data.nameRu}
-            width="100%"
-          />
+        <Grid item xs={12} md={4}>
+          <Box position="relative" width="100%">
+            <img
+              src={responsefilm.data.posterUrl}
+              alt={responsefilm.data.nameRu}
+              style={{
+                width: "100%",
+                maxWidth: 370,
+                height: "auto",
+                objectFit: "cover",
+                borderRadius: 8,
+              }}
+            />
+            <Box
+              sx={{
+                position: "absolute",
+                top: 8,
+                right: 8,
+                backgroundColor: "rgba(0, 0, 0, 0.7)",
+                color: "white",
+                px: 1.5,
+                py: 0.3,
+                borderRadius: "8px",
+                fontWeight: "bold",
+                fontSize: "14px",
+                userSelect: "none",
+                display: "flex",
+                alignItems: "center",
+                gap: "4px",
+                minWidth: "40px",
+                boxShadow: "0 0 6px rgba(0,0,0,0.7)",
+              }}
+              title={`Рейтинг зрителей: ${
+                Number.isFinite(responsefilm.data.ratingKinopoisk)
+                  ? responsefilm.data.ratingKinopoisk.toFixed(1)
+                  : "нет данных"
+              } / 10`}
+            >
+              <span>
+                {Number.isFinite(responsefilm.data.ratingKinopoisk)
+                  ? responsefilm.data.ratingKinopoisk.toFixed(1)
+                  : "—"}
+              </span>
+            </Box>
+          </Box>
         </Grid>
+
         <Grid size={{ sm: 12, md: 6 }}>
           <Grid container>
             <Grid size={2}>

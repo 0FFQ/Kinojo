@@ -1,14 +1,18 @@
-import PeopleIcon from "@mui/icons-material/People";
+
 import { Box, Link, Stack } from "@mui/material";
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 
-
 export default function MovieCard({ movie }) {
+  const title = movie.nameRu ?? movie.nameEn ?? "";
+
+  const displayTitle =
+    title.length > 18 ? title.slice(0, 18) + "…" : title;
+
   return (
     <Stack
       sx={{
-        margin: "2.5px", // отступ вокруг карточки
+        margin: "5px", // отступ вокруг карточки
       }}
     >
       <Box sx={{ position: "relative", display: "inline-block" }}>
@@ -50,7 +54,6 @@ export default function MovieCard({ movie }) {
               : "нет данных"
           } / 10`}
         >
-          <PeopleIcon sx={{ color: "#ffffff", fontSize: 16 }} />
           <span>
             {Number.isFinite(movie.ratingKinopoisk)
               ? movie.ratingKinopoisk.toFixed(1)
@@ -67,9 +70,14 @@ export default function MovieCard({ movie }) {
           width: "200px",
           textDecoration: "none",
           color: "inherit",
+          overflow: "hidden",
+          whiteSpace: "nowrap",
+          textOverflow: "ellipsis",
+          mb: 0.2, mt: 0.2, // отступ сверху, снизу
+          display: "block",
         }}
       >
-        {movie.nameRu ? movie.nameRu : movie.nameEn}
+        {displayTitle}
       </Link>
     </Stack>
   );

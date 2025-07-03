@@ -4,12 +4,15 @@ const darkTheme = createTheme({
   palette: {
     mode: "dark",
     background: {
-      default: "#1e1e1e", // Чёрный фон страницы
-      paper: "#121212", // Фон компонентов
+      default: "#1e1e1e",
+      paper: "#121212",
     },
     text: {
-      primary: "#ffffff", // Белый цвет текста
+      primary: "#ffffff",
     },
+  },
+  typography: {
+    fontFamily: "'Comic Relief', system-ui",
   },
 });
 
