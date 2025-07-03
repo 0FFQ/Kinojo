@@ -9,7 +9,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link as ReactRouter, useNavigate, useParams } from "react-router-dom";
 import {
   useGetFilmQuery,
@@ -21,13 +21,50 @@ import MovieCard from "../ui/MovieCard/MovieCard";
 import VideoPlayer from "../ui/VideoPlayer";
 
 export default function MovieDetail() {
+  const apiKey = import.meta.env.VITE_KINOPOISK_KEY;
   const { id } = useParams();
   const responsefilm = useGetFilmQuery(id);
   const responseSequelsAndPrequels = useGetSequelsAndPrequelsQuery(id);
   const responseStaff = useGetStaffQuery(id);
   const navigate = useNavigate();
 
-  
+  const [fullSequels, setFullSequels] = useState([]);
+
+  useEffect(() => {
+    async function fetchFullSequels() {
+      if (responseSequelsAndPrequels.data?.length) {
+        const promises = responseSequelsAndPrequels.data.map(async (item) => {
+          try {
+            const res = await fetch(`https://kinopoiskapiunofficial.tech/api/v2.2/films/${item.kinopoiskId}`, {
+              headers: {
+                "X-API-KEY": apiKey,
+                "Content-Type": "application/json",
+              },
+            });
+    
+            if (!res.ok) return item;
+    
+            const data = await res.json();
+    
+            return {
+              kinopoiskId: item.kinopoiskId,
+              nameRu: item.nameRu,
+              posterUrl: data.posterUrl,
+              posterUrlPreview: data.posterUrlPreview,
+              ratingKinopoisk: data.ratingKinopoisk ?? null,
+            };
+          } catch (e) {
+            return item;
+          }
+        });
+    
+        const results = await Promise.all(promises);
+        setFullSequels(results);
+      }
+    }
+    fetchFullSequels();
+  }, [responseSequelsAndPrequels.data]);
+
   if (
     responsefilm.isLoading ||
     responseSequelsAndPrequels.isLoading ||
@@ -43,9 +80,13 @@ export default function MovieDetail() {
   if (responsefilm.error || responseStaff.error) {
     return <ErrorMessage />;
   }
+  console.log("Сиквелы и приквелы:", responseSequelsAndPrequels.data);
+
+  const sequelsToShow = fullSequels.length ? fullSequels : responseSequelsAndPrequels.data;
+
   return (
     <>
-      <Grid container spacing={{ xs: 1, md: 2 }} mt={0.5}>
+      <Grid container spacing={{ xs: 1, md: 2 }} mt={2}>
         <Grid item xs={12} md={4}>
           <Box position="relative" width="100%">
             <img
@@ -257,19 +298,19 @@ export default function MovieDetail() {
         sx={{ display: "flex", justifyContent: "center", textAlign: "center" }}
       >
         <Grid size={12}>
-          <Typography variant="h5">Смотреть онлайн</Typography>
+          <Typography mt="20px" mb="25px" variant="h5">Смотреть онлайн</Typography>
         </Grid>
         <VideoPlayer />
       </Grid>
       {/* -------------------- */}
       <Stack alignItems="center">
-        <Typography variant="h5">
-          {responseSequelsAndPrequels?.data?.length > 0
+        <Typography mb="20px" mt="25px" variant="h5">
+          {sequelsToShow?.length > 0
             ? "Сиквелы и приквелы"
             : "Нет сиквелов и приквелов"}
         </Typography>
 
-        {responseSequelsAndPrequels?.data?.length > 0 && (
+        {sequelsToShow?.length > 0 && (
           <Stack
             direction="row"
             spacing={2}
@@ -278,8 +319,8 @@ export default function MovieDetail() {
               justifyContent: "center",
             }}
           >
-            {responseSequelsAndPrequels.data.map((el) => (
-              <MovieCard key={el.kinopoiskId} movie={el} />
+            {sequelsToShow.map((el) => (
+              <MovieCard key={el.kinopoiskId} movie={el} reload />
             ))}
           </Stack>
         )}
