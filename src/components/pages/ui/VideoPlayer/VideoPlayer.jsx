@@ -11,7 +11,7 @@ export default function VideoPlayer() {
     let isMounted = true;
     const dataUrl = encodeURIComponent(window.location.href);
     const url =
-      "//js.espanplay.site/get_player?w=610&h=370&type=widget&kp_id=&players=videocdn,hdvb,bazon,alloha,ustore,kodik,trailer&r_id=videoplayers&vni=VIDEOCDN&vti=&vdi=&hni=HDVB&hti=&hdi=&bni=BAZON&bti=&bdi=&alni=ALLOHATV&alti=&aldi=&usni=USTOREBZ&usti=&usdi=&koni=KODIK&koti=&kodi=&tti=&ru=" +
+      "//pleer.videoplayers.club//get_player?w=610&h=370&type=widget&kp_id=&players=videocdn,hdvb,bazon,alloha,ustore,kodik,trailer&r_id=videoplayers&vni=VIDEOCDN&vti=&vdi=&hni=HDVB&hti=&hdi=&bni=BAZON&bti=&bdi=&alni=ALLOHATV&alti=&aldi=&usni=USTOREBZ&usti=&usdi=&koni=KODIK&koti=&kodi=&tti=&ru=" +
       dataUrl;
 
     setLoading(true);
@@ -46,7 +46,6 @@ export default function VideoPlayer() {
     };
   }, []);
 
-
   if (error)
     return (
       <div
@@ -57,7 +56,7 @@ export default function VideoPlayer() {
           width: "610px",
           display: "flex",
           justifyContent: "center",
-          alignItems: "center",  // строго по центру
+          alignItems: "center", // строго по центру
           backgroundColor: "#fff",
           color: "black",
           fontWeight: 600,
