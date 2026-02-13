@@ -5,8 +5,8 @@
 <img src="ImagesForReadme\screen_1.png" width="900">
 
 <div align="center">
-  <img src="ImagesForReadme\screen_2.png" width="220">
-  <img src="ImagesForReadme\screen_3.png" width="220">
-  <img src="ImagesForReadme\screen_4.png" width="220">
-  <img src="ImagesForReadme\screen_5.png" width="220">
+  <img src="ImagesForReadme\screen_2.png" width="900">
+  <img src="ImagesForReadme\screen_3.png" width="900">
+  <img src="ImagesForReadme\screen_4.png" width="900">
+  <img src="ImagesForReadme\screen_5.png" width="900">
 </div>
