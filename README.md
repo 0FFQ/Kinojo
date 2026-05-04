@@ -1,4 +1,4 @@
-#Kinojo — Online Movie Site
+Kinojo — Online Movie Site
 
 <p align="center">
   <a href="https://0ffq.github.io/Kinojo/">
@@ -6,7 +6,7 @@
   </a>
 </p>
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Frontend
 <p align="center">
@@ -42,12 +42,9 @@
 
 ---
 
-## Live Demo
+## Demo
 
 **[https://0ffq.github.io/Kinojo/](https://0ffq.github.io/Kinojo/)**
-
-> **Important:** Online movie streaming is not possible due to API limitations.  
-> With a properly connected database, you can watch movies yourself, but they won't be available to others.
 
 ---
 
