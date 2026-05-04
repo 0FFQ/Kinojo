@@ -1,4 +1,4 @@
-Kinojo — Online Movie Site
+Kinojo - Online Movie Site
 
 <p align="center">
   <a href="https://0ffq.github.io/Kinojo/">
